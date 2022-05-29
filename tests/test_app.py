@@ -1,5 +1,6 @@
 import pytest
-from service.app import app,read_config,check_rainfall
+import requests
+from service.app import app,read_config,check_rainfall,LocationException
 
 @pytest.fixture(scope='session')
 def client():
@@ -22,6 +23,7 @@ def test_app_status(client):
     assert response.status_code == 200
     assert 'Kent Ridge Road' in response.get_data(as_text=True)
 
+@pytest.mark.exceptions
 def test_exceptions():
-    with pytest.raises(FileNotFoundError):
+    with pytest.raises((FileNotFoundError,requests.exceptions.ConnectionError,LocationException)):
         url,loc=read_config('conf/config1.yaml')
