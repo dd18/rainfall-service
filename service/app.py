@@ -2,10 +2,16 @@ from flask import Flask
 from gevent.pywsgi import WSGIServer
 import yaml
 import requests
+from datetime import datetime
+import socket
 
 class LocationException(Exception):
   def __init__(self, message):
     self.message = message
+
+def at_time():
+    now = datetime.now()
+    return now.strftime("%Y-%m-%d %H:%M:%S")
 
 app=Flask(__name__)
 
@@ -46,9 +52,10 @@ def query_rainfall():
         url,loc=read_config("conf/config.yaml")
         return check_rainfall(url,loc)
     except Exception as e:
-        print(str(e))
+        print(at_time()+" - "+str(e))
         return str(e)
 
 if __name__=='__main__':
     http_server = WSGIServer(('',8080),app)
+    print(at_time()+" - Rainfall Service started on "+ socket.gethostbyname(socket.gethostname())+':8080')
     http_server.serve_forever()
