@@ -14,3 +14,5 @@ def test_load_config_file():
 def test_check_rainfall():
     output=check_rainfall('https://api.data.gov.sg/v1/environment/rainfall','Kent Ridge Road')
     assert 'Kent Ridge Road' in output
+    assert 'Raining' or 'Not Raining' in output
+    assert '0mm' or '.' in output
