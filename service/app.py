@@ -43,7 +43,7 @@ def check_rainfall(url,loc):
            raise LocationException("Location "+loc+" doesn't exist")
     else:
         print(at_time()+" - URL=> "+url+" is not correct")
-        output="There is some internal error. Please check the console log"
+        output="There is some internal error. Please contact the admin"
     return output
 
 @app.route('/')
@@ -53,7 +53,7 @@ def query_rainfall():
         return check_rainfall(url,loc)
     except Exception as e:
         print(at_time()+" - "+str(e))
-        return str(e)
+        return "There is some internal error. Please contact the admin"
 
 if __name__=='__main__':
     http_server = WSGIServer(('',8080),app)
