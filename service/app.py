@@ -3,10 +3,11 @@ from gevent.pywsgi import WSGIServer
 import yaml
 import requests
 
+class LocationException(Exception):
+  def __init__(self, message):
+    self.message = message
+
 app=Flask(__name__)
-@app.route('/')
-def query_rainfall():
-    return "Raining"
 
 def read_config(file_name):
     with open(file_name, 'r') as file:
@@ -38,6 +39,15 @@ def check_rainfall(url,loc):
         print(at_time()+" - URL=> "+url+" is not correct")
         output="There is some internal error. Please check the console log"
     return output
+
+@app.route('/')
+def query_rainfall():
+    try:
+        url,loc=read_config("conf/config.yaml")
+        return check_rainfall(url,loc)
+    except Exception as e:
+        print(str(e))
+        return str(e)
 
 if __name__=='__main__':
     http_server = WSGIServer(('',8080),app)
