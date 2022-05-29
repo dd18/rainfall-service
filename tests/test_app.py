@@ -21,3 +21,7 @@ def test_app_status(client):
     response = client.get("/")
     assert response.status_code == 200
     assert 'Kent Ridge Road' in response.get_data(as_text=True)
+
+def test_exceptions():
+    with pytest.raises(FileNotFoundError):
+        url,loc=read_config('conf/config1.yaml')
