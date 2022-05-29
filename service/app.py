@@ -1,6 +1,7 @@
 from flask import Flask
 from gevent.pywsgi import WSGIServer
 import yaml
+import requests
 
 app=Flask(__name__)
 @app.route('/')
@@ -13,6 +14,30 @@ def read_config(file_name):
         url=load_config['url']
         loc=load_config["location"]
     return url,loc
+
+def check_rainfall(url,loc):
+    resp=requests.get(url)
+    status=""
+    if resp.status_code == 200:
+        timestamp=resp.json()["items"][0]["timestamp"]
+        time=timestamp.split('T')[1][0:5]
+        station_readings=resp.json()["items"][0]["readings"]
+        reading_unit=resp.json()["metadata"]["reading_unit"]
+        for station in resp.json()["metadata"]["stations"]:
+            if station['name'] == loc:
+                for reading in station_readings:
+                    if reading["station_id"]==station['id']:
+                        status="Raining" if reading["value"] >0 else "Not Raining"
+                        output=station['name']+', '+time+', '+str(reading["value"])+reading_unit+', '+status
+                        break
+                status="found"
+                break
+        if status=="":
+           raise LocationException("Location "+loc+" doesn't exist")
+    else:
+        print(at_time()+" - URL=> "+url+" is not correct")
+        output="There is some internal error. Please check the console log"
+    return output
 
 if __name__=='__main__':
     http_server = WSGIServer(('',8080),app)
