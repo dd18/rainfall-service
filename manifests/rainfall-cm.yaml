@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    url: https://api.data.gov.sg/v1/environment/rainfall
+    location: Kent Ridge Road
+kind: ConfigMap
+metadata:
+  name: rainfall-config
+  namespace: rainfall

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rainfall
+  namespace: rainfall
+spec:
+  containers:
+    - name: rainfall-container
+      image: docklinux/rainfall:latest
+      volumeMounts:
+      - name: config-volume
+        mountPath: /app/conf
+  volumes:
+    - name: config-volume
+      configMap:
+        name: rainfall-config
+  restartPolicy: Never
