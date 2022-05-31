@@ -17,6 +17,7 @@ Location, Time, Rainfall Amount, Raining/Not Raining
 **Example:**
 
 When your app is running, calling http://localhost:8080 will return the current data for the given location, as a single line:
+
 Marina Gardens Drive, 08:45, 0.2mm, Raining
 
 ## Installation, Setup and Run
@@ -34,3 +35,7 @@ Install the python dependencies
 Run the application
 
         python service/app.py
+      
+Check the output
+
+        curl -X GET http://localhost:8080
