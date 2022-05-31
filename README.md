@@ -21,21 +21,41 @@ When your app is running, calling http://localhost:8080 will return the current 
 Marina Gardens Drive, 08:45, 0.2mm, Raining
 
 ## Installation, Setup and Run
-#### Physical machine/ VM
+#### On Physical machine/ VM
 
 Clone the repo
 
-        git clone https://github.com/dd18/rainfall-service.git 
+    git clone https://github.com/dd18/rainfall-service.git 
    
 Install the python dependencies
 
-        cd rainfall-service/
-        pip install -r requirements.txt
+    cd rainfall-service/
+    pip install -r requirements.txt
    
 Run the application
 
-        python service/app.py
+    python service/app.py
       
 Check the output
 
-        curl -X GET http://localhost:8080
+    curl -X GET http://localhost:8080
+
+#### On Docker
+
+Clone the repo
+
+    git clone https://github.com/dd18/rainfall-service.git
+        
+Create the docker image
+        
+    cd rainfall-service/
+    docker build -t rainfallsvc .
+
+Check the docker images
+    
+    docker images
+
+Run the app in the container
+
+    docker run -d -p 8080:8080 -v $(pwd)/conf/config.yaml:/app/conf/config.yaml --name rainfall rainfallsvc
+        
