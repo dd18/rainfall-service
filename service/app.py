@@ -46,7 +46,7 @@ def check_rainfall(url,loc):
         output="There is some internal error. Please contact the admin"
     return output
 
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def query_rainfall():
     try:
         url,loc=read_config("conf/config.yaml")
