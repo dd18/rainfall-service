@@ -5,7 +5,7 @@ It is a simple web application that extracts rainfall data of a particular locat
 
 The application is developed as a webservice to serve the selected rainfall data over HTTP using Flask, a micro web framework written in Python.
 
-It uses a config file(**config.yaml**) with the below 2 entries
+It uses a config file(**config.yaml**) as an input with the below 2 entries
 
     url: https://api.data.gov.sg/v1/environment/rainfall
     location: Marina Gardens Drive
