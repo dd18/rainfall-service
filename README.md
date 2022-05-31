@@ -77,7 +77,7 @@ Create the namespace
 
 Create the configmap
 
-*using config.yaml*
+*using config.yaml directly*
 
     git clone https://github.com/dd18/rainfall-service.git
     cd rainfall-service/
