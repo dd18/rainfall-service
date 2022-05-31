@@ -36,7 +36,7 @@ Run the application
 
     python service/app.py
       
-Check the output
+Test
 
     curl -X GET http://localhost:8080
 
@@ -59,7 +59,7 @@ Run the app in the container
 
     docker run -d -p 8080:8080 -v $(pwd)/conf/config.yaml:/app/conf/config.yaml --name rainfall rainfallsvc
     
-Check the output
+Test
 
     curl -X GET http://localhost:8080
 
@@ -97,7 +97,7 @@ Port Forwarding
  
     kubectl port-forward rainfall -n rainfall 8080:8080
 
-Check the output
+Test
 
     curl -X GET http://localhost:8080
     
