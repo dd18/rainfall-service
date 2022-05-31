@@ -65,6 +65,8 @@ Check the output
 
 #### On Kubernetes
 
+rainfall docker image is pushed to [dockerhub](https://hub.docker.com/repository/docker/docklinux/rainfall) and is publicly available with the tag **docklinux/rainfall**. POD definition file pulls the docker image from [dockerhub](https://hub.docker.com/repository/docker/docklinux/rainfall).
+
 Create the namespace
 
     kubectl create ns rainfall
@@ -78,7 +80,7 @@ Create the configmap
     kubectl create configmap rainfall-config --from-file conf/config.yaml -n rainfall
                                
 *Or using manifest*
-                               
+                             
     git clone https://github.com/dd18/rainfall-service.git
     cd rainfall-service/
     kubectl apply -f manifests/rainfall-cm.yaml
