@@ -58,4 +58,30 @@ Check the docker images
 Run the app in the container
 
     docker run -d -p 8080:8080 -v $(pwd)/conf/config.yaml:/app/conf/config.yaml --name rainfall rainfallsvc
+    
+Check the output
+
+    curl -X GET http://localhost:8080
+
+#### On Kubernetes
+
+Create the namespace
+
+    kubectl create ns rainfall
+
+Create the configmap
+
+*using config.yaml*
+
+    git clone https://github.com/dd18/rainfall-service.git
+    cd rainfall-service/
+    kubectl create configmap rainfall-config --from-file conf/config.yaml -n rainfall
+                               
+*Or using manifest*
+                               
+    git clone https://github.com/dd18/rainfall-service.git
+    cd rainfall-service/
+    kubectl apply -f manifests/rainfall-cm.yaml
+    
+    
         
