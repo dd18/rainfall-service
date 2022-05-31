@@ -82,6 +82,18 @@ Create the configmap
     git clone https://github.com/dd18/rainfall-service.git
     cd rainfall-service/
     kubectl apply -f manifests/rainfall-cm.yaml
+
+Create the Pod
+
+    kubectl apply -f manifests/rainfall-pod.yaml
+    
+Port Forwarding
+ 
+    kubectl port-forward rainfall -n rainfall 8080:8080
+
+Check the output
+
+    curl -X GET http://localhost:8080
     
     
         
